@@ -1,0 +1,53 @@
+#trending-main-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 10rem;
+    padding: 16px;
+
+    img {
+        width: 10rem;
+        border-radius: 16px;
+        overflow-x: visible;
+    }
+
+    .card-desc{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: -20px;
+        margin-left: 10px;  
+
+        
+        .rate-view {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 18px;
+            background-color: $themeColor;
+            margin-bottom: 8px;
+            
+
+            .rate-value {
+                font-size: 12px;
+                font-weight: bold;
+                color: white;
+            }
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: bold;
+            padding-bottom: 4px;
+        }
+
+        .card-date{
+            font-size: 14px;
+            color: rgb(98, 89, 89);
+        }
+        
+        
+    }
+}

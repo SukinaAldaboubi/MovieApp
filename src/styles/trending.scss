@@ -1,0 +1,59 @@
+#trending-main {
+    display: flex;
+    flex-direction: column;
+    margin: 16px 194px;
+
+    .header-section {
+        display: flex;
+        flex-direction: row;
+        
+        h2 {
+            padding-right: 16px;
+        }
+
+        .options-section {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            overflow: hidden;
+            border: 2px solid $themeColor;
+            border-radius: 16px;
+            
+
+            #trending-option {
+                text-align: center;
+                padding-right: 16px;
+                padding-left: 16px;
+                font-size: 14px;
+                font-weight: bold;
+                border: 0;
+            }
+
+            .selected {
+                background-color: $themeColor;
+                color: white;
+            }
+            
+            .notSelected{
+                background-color: transparent;
+                color: $themeColor;
+            }
+        }
+    }
+
+    .trending-data {
+        display: flex;
+        flex-direction: row;
+        overflow-y: hidden;
+
+        .trending-card {
+            border-radius: 16px;
+            margin: 16px;
+        }
+
+    }
+
+    @media (max-width:1000px) {
+        margin: 19px;
+    }
+}

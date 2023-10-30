@@ -1,0 +1,17 @@
+.navbar {
+    position: sticky;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    background-color: $themeColor;
+    padding: 32px 0 0 84px;
+    color:white
+}
+
+.link {
+    color: white;
+    padding: 8px 0 0 24px;
+    text-decoration: none;
+}
