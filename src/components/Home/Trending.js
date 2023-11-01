@@ -1,32 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import TrendingCard from "./TrendingCard";
-import { OptionButtons } from "../Helpers/OptionButtons";
+import OptionButtons from "../Helpers/OptionButtons";
 
-const Trending = ({ img }) => {
+const Trending = ({ movies, selectedType, setSelectedType }) => {
   return (
-    <main id="trending-main" className="trending-main">
-      <div className="header-section">
-        <h2>Trending</h2>
-        <div className="options-section">
-          <OptionButtons />
-        </div>
-      </div>
-      <div className="trending-data">
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-        <TrendingCard className="trending-card" img={img} />
-      </div>
+    <main id="trending-main">
+      {movies.length === 0 ? (
+        <p> No search results found </p>
+      ) : (
+        <>
+          <div className="header-section">
+            <h2>Trending</h2>
+            <div className="options-section">
+              <OptionButtons
+                selectedType={selectedType}
+                setSelectedType={setSelectedType}
+              />
+            </div>
+          </div>
+
+          <div className="trending-data">
+            {movies.map((movie) => {
+              return (
+                <TrendingCard
+                  key={movie.id}
+                  className="trending-card"
+                  movie={movie}
+                />
+              );
+            })}
+          </div>
+        </>
+      )}
     </main>
   );
 };

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const Header = ({ handleSearch }) => {
-  var searchTxt = "";
+const Header = () => {
+  const [searchText, setSearchText] = useState("empty");
   const searchChange = (e) => {
-    searchTxt = e.target.value;
+    setSearchText(e.target.value);
   };
 
   return (
@@ -15,9 +16,11 @@ const Header = ({ handleSearch }) => {
 
       <div className="search-container">
         <input type="text" placeholder="Search.." onChange={searchChange} />
-        <button className="search-btn" onClick={() => handleSearch(searchTxt)}>
+        <Link className="search-btn" to={`/search/${searchText}`}>
           Search
-        </button>
+          {/* <label className="search-lbl">Search</label> */}
+        </Link>
+        ;
       </div>
     </header>
   );

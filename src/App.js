@@ -3,6 +3,7 @@ import MovieDetails from "./components/Home/MovieDetails";
 import Home from "./components/Home/Home";
 import SharedLayout from "./components/Main/SharedLayout";
 import About from "./components/About";
+import Search from "./components/Home/Search";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/movieDetail" element={<MovieDetails />} />
+            <Route path="/movieDetail/:movieId" element={<MovieDetails />} />
+            <Route path="/search/:searchText" element={<Search />} />
           </Route>
         </Routes>
       </BrowserRouter>

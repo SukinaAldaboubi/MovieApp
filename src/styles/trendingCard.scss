@@ -1,12 +1,21 @@
+.cardLink {
+    text-decoration: none;
+    color: black;
+}
+
 #trending-main-card {
+    
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     width: 10rem;
+    height: 24rem;
     padding: 16px;
+    margin-top: 16px;
 
     img {
         width: 10rem;
+        height: 16rem;
         border-radius: 16px;
         overflow-x: visible;
     }
@@ -25,7 +34,7 @@
             align-items: center;
             width: 36px;
             height: 36px;
-            border-radius: 18px;
+            border-radius: 50%;
             background-color: $themeColor;
             margin-bottom: 8px;
             

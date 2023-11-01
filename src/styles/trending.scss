@@ -18,23 +18,25 @@
             overflow: hidden;
             border: 2px solid $themeColor;
             border-radius: 16px;
-            
 
-            #trending-option {
+            .selected {
                 text-align: center;
                 padding-right: 16px;
                 padding-left: 16px;
                 font-size: 14px;
                 font-weight: bold;
                 border: 0;
-            }
-
-            .selected {
                 background-color: $themeColor;
                 color: white;
             }
             
             .notSelected{
+                text-align: center;
+                padding-right: 16px;
+                padding-left: 16px;
+                font-size: 14px;
+                font-weight: bold;
+                border: 0;
                 background-color: transparent;
                 color: $themeColor;
             }

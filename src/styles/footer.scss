@@ -14,7 +14,7 @@
             align-items: center;
 
             button {
-                background-color: $darkPurple;
+                background-color: $themeColor;
                 text-align: center;
                 color: white;
                 width: 24px;
@@ -24,7 +24,7 @@
             }
 
             button:hover {
-                background-color: lighten($color: $darkPurple, $amount: 20%)
+                background-color: lighten($color: $themeColor, $amount: 10%)
             }
         }
     }
