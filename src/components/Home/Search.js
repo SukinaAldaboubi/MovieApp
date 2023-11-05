@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import TrendingCard from "./TrendingCard";
+import { search, getMoviesGenre } from "../../API/DataSource";
 
 const Search = () => {
-  const apiKey = "92f280f02fb64ecc761b2833e7d041fa";
   const { searchText } = useParams();
-  const noSearchQuery = searchText === "empty" ? true : false;
+  const [searchQueryStatus, setSearchQueryStatus] = useState(
+    searchText === "empty" ? true : false
+  );
   const [searchQ, setSearchQ] = useState(searchText);
   const [genres, setGenres] = useState([]);
   const [searchResult, setSearchResult] = useState([]);
@@ -15,31 +17,22 @@ const Search = () => {
   const resultsToDisplay = isFilter ? filterResult : searchResult;
 
   useEffect(() => {
-    getMoviesGenre();
-    search();
+    loadMoviesGenre();
+    handleSearch();
   }, [searchQ]);
 
-  //   useEffect(() => {
-  //     setFilterResult([]);
-  //   }, [isFilter]);
-
-  async function getMoviesGenre() {
-    const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    setGenres(data.genres);
+  async function loadMoviesGenre() {
+    setGenres(await getMoviesGenre());
   }
 
-  async function search() {
-    if (!noSearchQuery) {
-      const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchQ}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      setSearchResult(data.results);
+  async function handleSearch() {
+    if (!searchQueryStatus) {
+      setSearchResult(await search(searchQ));
     }
   }
 
-  const handleSearch = (e) => {
+  const searchDidChange = (e) => {
+    setSearchQueryStatus(e.target.value ? false : true);
     setIsFilter(false);
     setSearchQ(e.target.value);
   };
@@ -63,10 +56,10 @@ const Search = () => {
         <BsSearch className="search-icon" />
         <input
           type="text"
-          defaultValue={!noSearchQuery ? searchQ : ""}
+          defaultValue={!searchQueryStatus ? searchQ : ""}
           placeholder="Search for a movie, tv show, person..."
           className="search-input"
-          onChange={handleSearch}
+          onChange={searchDidChange}
         />
       </div>
       <div className="diveder" />
@@ -92,7 +85,7 @@ const Search = () => {
         </div>
 
         <div className="result-section">
-          {noSearchQuery || searchResult.length === 0 ? (
+          {searchQueryStatus || searchResult.length === 0 ? (
             <p>No Search results found...</p>
           ) : (
             resultsToDisplay.map((movie) => {

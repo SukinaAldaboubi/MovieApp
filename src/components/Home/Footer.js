@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Footer = ({ handleNextPage }) => {
-  const count = 10;
-  const pageNums = [];
+  const [pageNums, setPageNums] = useState([]);
 
-  for (let i = 1; i <= count; i++) {
-    pageNums.push(i);
-  }
+  useEffect(() => {
+    let pages = [];
+    for (let i = 1; i <= 10; i++) {
+      pages.push(i);
+    }
+    setPageNums(pages);
+  }, [pageNums]);
 
   return (
     <div id="pages-container">

@@ -18,7 +18,6 @@ const Header = () => {
         <input type="text" placeholder="Search.." onChange={searchChange} />
         <Link className="search-btn" to={`/search/${searchText}`}>
           Search
-          {/* <label className="search-lbl">Search</label> */}
         </Link>
         ;
       </div>
