@@ -59,12 +59,20 @@
                     list-style-type: none;
                     
 
-                    .gener-item {
+                    #gener-item {
                         padding: 12px;
                     }
 
-                    .gener-item:hover {
+                    #gener-item:hover {
                         background-color: lighten($color: $themeColor, $amount: 80%); 
+                    }
+
+                    .selectedItem {
+                        background-color: lighten($color: $themeColor, $amount: 80%); 
+                    }
+
+                    .notSelectedItem {
+                        background-color: white; 
                     }
                     
                 }

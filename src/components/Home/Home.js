@@ -9,13 +9,14 @@ const Home = () => {
   const [searchTxt, setSearchTxt] = useState("");
   const [page, setPage] = useState(1);
   const [selectedType, setSelectedType] = useState("day");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadTrendingMovies();
   }, [searchTxt, page, selectedType]);
 
   async function loadTrendingMovies() {
-    const movies = await getTrendingMovies(selectedType, page);
+    const movies = await getTrendingMovies(selectedType, page, setLoading);
 
     if (searchTxt === "") {
       setTrendingMovies(movies.results);
@@ -46,9 +47,11 @@ const Home = () => {
         movies={trendingMovies}
         selectedType={selectedType}
         setSelectedType={setSelectedType}
+        loading={loading}
+        setLoading={setLoading}
       />
 
-      <Footer handleNextPage={handleNextPage} />
+      <Footer handleNextPage={handleNextPage} page={page} />
     </section>
   );
 };

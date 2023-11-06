@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 
-const OptionButtons = ({ selectedType, setSelectedType }) => {
+const OptionButtons = ({ selectedType, setSelectedType, setLoading }) => {
   const changeColor = (btn) => {
+    setLoading(true);
     setSelectedType(btn);
   };
 

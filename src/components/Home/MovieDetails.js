@@ -11,14 +11,16 @@ const MovieDetails = () => {
     JSON.parse(localStorage.getItem("fav") || "[]")
   );
   const isFav = favIds.includes(movieId);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("Movie id = " + movieId);
+    // console.log("movieId" + movieId);
     loadMovieDetails();
   }, []);
 
   async function loadMovieDetails() {
-    setMovieDetails(await getMovieDetails(movieId));
+    await getMovieDetails(movieId, setMovieDetails, setError, setLoading);
   }
 
   const handleFav = () => {
@@ -55,6 +57,14 @@ const MovieDetails = () => {
       backgroundImg: movieDetails.backdrop_path,
     };
   };
+
+  if (error) {
+    return <p className="errorLbl">{error}</p>;
+  }
+
+  if (loading) {
+    return <p className="loadingLbl">Loading..</p>;
+  }
 
   return (
     <div id="main">

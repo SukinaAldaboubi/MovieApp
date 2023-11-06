@@ -14,7 +14,7 @@
             align-items: center;
 
             button {
-                background-color: $themeColor;
+                background-color: lighten($color: $themeColor, $amount: 20%);
                 text-align: center;
                 color: white;
                 width: 24px;
@@ -24,7 +24,15 @@
             }
 
             button:hover {
-                background-color: lighten($color: $themeColor, $amount: 10%)
+                background-color: $themeColor;
+            }
+
+            .notSelected {
+                background-color: lighten($color: $themeColor, $amount: 20%);
+            }
+
+            .selected {
+                background-color: $themeColor;
             }
         }
     }

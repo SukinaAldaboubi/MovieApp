@@ -1,12 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import imgUrl from "../../API/DataSource";
+import moviePlaceholder from "../../assets/movie_placeholder.png";
 
 const TrendingCard = ({ movie }) => {
   return (
     <Link className="cardLink" to={`/movieDetail/${movie.id}`}>
       <main id="trending-main-card">
-        <img src={imgUrl + movie.poster_path} alt="This is poster image." />
+        <img
+          src={
+            movie.poster_path ? imgUrl + movie.poster_path : moviePlaceholder
+          }
+          alt="This is poster image."
+        />
         <div className="card-desc">
           <div className="rate-view">
             <label className="rate-value">

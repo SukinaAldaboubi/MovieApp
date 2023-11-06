@@ -7,3 +7,19 @@
 @import './trending.scss';
 @import './trendingCard.scss';
 @import './search.scss';
+
+.errorLbl {
+    margin: 32px;
+    font-style: italic;
+    font-size: 18px;
+}
+
+.loadingLbl {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    height: 24rem;
+}

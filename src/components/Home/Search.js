@@ -14,6 +14,7 @@ const Search = () => {
   const [searchResult, setSearchResult] = useState([]);
   const [filterResult, setFilterResult] = useState([]);
   const [isFilter, setIsFilter] = useState(false);
+  const [selectedFilter, setSelectedFilter] = useState();
   const resultsToDisplay = isFilter ? filterResult : searchResult;
 
   useEffect(() => {
@@ -32,6 +33,7 @@ const Search = () => {
   }
 
   const searchDidChange = (e) => {
+    setSelectedFilter(null);
     setSearchQueryStatus(e.target.value ? false : true);
     setIsFilter(false);
     setSearchQ(e.target.value);
@@ -39,6 +41,7 @@ const Search = () => {
 
   const handleFilter = (id) => {
     setIsFilter(true);
+    setSelectedFilter(id);
     let filteredArray = [];
     searchResult.forEach((result) => {
       if (result.genre_ids) {
@@ -73,7 +76,12 @@ const Search = () => {
                 return (
                   <li
                     key={genre.id}
-                    className="gener-item"
+                    id="gener-item"
+                    className={
+                      selectedFilter == genre.id
+                        ? "selectedItem"
+                        : "notSelectedItem"
+                    }
                     onClick={() => handleFilter(genre.id)}
                   >
                     {genre.name}
