@@ -1,6 +1,6 @@
 import React from "react";
 import TrendingCard from "./TrendingCard";
-import OptionButtons from "../Helpers/OptionButtons";
+import OptionButtons from "../helpers/OptionButtons";
 
 const Trending = ({
   movies,

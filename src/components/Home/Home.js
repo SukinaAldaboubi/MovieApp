@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./HomeHeader";
 import Trending from "./Trending";
-import { getTrendingMovies } from "../../API/DataSource";
+import { getTrendingMovies } from "../../api/dataSource";
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [searchTxt, setSearchTxt] = useState("");
-  const [page, setPage] = useState(1);
   const [selectedType, setSelectedType] = useState("day");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadTrendingMovies();
-  }, [searchTxt, page, selectedType]);
+  }, [searchTxt, selectedType]);
 
   async function loadTrendingMovies() {
-    const movies = await getTrendingMovies(selectedType, page, setLoading);
+    const movies = await getTrendingMovies(selectedType, setLoading);
 
     if (searchTxt === "") {
       setTrendingMovies(movies.results);
       return;
     }
 
-    let movieTitle = "";
     setTrendingMovies(
       movies.results.filter((movie) =>
         (movie.title ? movie.title : movie.name).includes(searchTxt)
@@ -33,10 +30,6 @@ const Home = () => {
 
   const search = (title) => {
     setSearchTxt(title);
-  };
-
-  const handleNextPage = (num) => {
-    setPage(num);
   };
 
   return (
@@ -50,8 +43,6 @@ const Home = () => {
         loading={loading}
         setLoading={setLoading}
       />
-
-      <Footer handleNextPage={handleNextPage} page={page} />
     </section>
   );
 };

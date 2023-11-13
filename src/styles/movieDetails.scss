@@ -1,15 +1,19 @@
-#main {
-    position: relative;
-    z-index: 1;
+#main{
+    display: flex;
+    flex-direction: column;
 
-    .background-img {
+    #details-main {
+        position: relative;
+        z-index: 1;
+
+         .background-img {
         position: absolute;
         z-index: -1;    
         width: 100%;
         height: 100%;
         filter: brightness(0.4);
         
-    }
+         }
    
 
     #main-content {
@@ -86,23 +90,58 @@
                 justify-content: left;
                 align-items: center;
 
-                .rate {
+                .rate-section {
                     display: flex;
-                    justify-content: center;
+                    flex-direction: row;
                     align-items: center;
-                    width: 42px;
-                    height: 42px;
-                    border-radius: 50%;
-                    background-color: $themeColor;
-                    margin-bottom: 8px;
-                    margin-right: 16px;
-        
-                    .rate-value {
-                        font-size: 12px;
+                    position: relative;
+
+                    .rate {
+                        z-index: 1;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 56px;
+                        height: 56px;
+                        border-radius: 50%;
+                        background-color: $themeColor;
+                        transition: transform 0.15s ease-in-out;
+            
+                        .rate-value {
+                            font-size: 12px;
+                            font-weight: bold;
+                            color: white;
+                        }
+
+                        .rate-progress {
+                            position: absolute;
+                            width:48px;
+                            height:48px;
+                            overflow: visible;
+    
+                            .background-circle{
+                                fill: none;
+                            }
+    
+                            .progress-circle{
+                                fill: none;
+                                stroke-linecap: round;
+                            }
+                        }
+                    }
+                    
+                    .rate:hover {
+                        transform: scale3d(1.15, 1.15, 1) 
+                    }
+
+                    .userScore{
+                        font-size: 14px;
                         font-weight: bold;
-                        color: white;
+                        width: 40px;
+                        padding: 0 16px 0 8px;
                     }
                 }
+                
 
                 .fav {
                     display: flex;
@@ -112,9 +151,9 @@
                     height: 42px;
                     border-radius: 50%;
                     background-color: $themeColor;
-                    margin-bottom: 8px;
                     border: 0;
                     color: white;
+                    cursor: pointer;
 
                     .favIcon {
                         height: 16px;
@@ -126,20 +165,131 @@
             .overview-section {
                 display: flex;
                 flex-direction: column;
-                // flex-basis: 0;
-                // max-height: 50%;
-                
-                // background-color: red;
 
                 .overview-lbl {
                     padding-bottom: 8px;
                 }
+
+                .tagLine{
+                    font-style: italic;
+                    color: rgba($color: #fff, $alpha: 0.7);
+                    padding: 12px 0 18px ;
+                }
             }
+
+            .crew-section {
+                display: flex;
+                flex-direction: row;
+                padding-top: 12px;
+
+                .crew-info {
+                   width: 30%;
+
+                   .crew-name {
+                    font-size: 14px;
+                    font-weight: bold;
+                   }
+                   .crew-job {
+                    font-size: 14px;
+                   }
+                }
+        }
         } 
     }
     @media (max-width:1100px) {
-        padding: 32px;       
+        padding: 32px;      
+    }
     }
 }
 
+.cast-side-info {
+    display: flex;
+    flex-direction: row;
+    margin: 42px 64px 32px 164px;
+
+.cast-section {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+    padding: 16px;
+    width: 70%;
+
+    .cast-data { 
+        display: flex;
+        flex-direction: row;
+        padding-top: 16px;
+       
+    }
+}
+
+
+.sideInfo-section {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 40px 40px white;
+    padding-left: 16px;
+    width: 30%;
+    
+    .socail-media{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 24px;
+
+        .image-section {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 32px;
+
+            .link-icon {
+                padding-right: 8px;
+                width: 24px;
+                height: 24px;
+                color: black;
+            }
+
+            .offical-links {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 100%;
+
+                .links-diveder {
+                    height: 80%;
+                    width: 1px;
+                    background-color: gray;
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+    
+
+    .info-section{
+        display: flex;
+        flex-direction: column;
+        
+        .title-value-section {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 16px;
+            
+
+            .titleLbl {
+                font-size: 14px;
+                font-weight: bold;
+            }
+
+            .valueLbl {
+                font-size: 14px;
+            }
+        }
+
+    }
+}
+@media (max-width:1100px) {
+    margin: 42px;      
+}
+
+}
 }

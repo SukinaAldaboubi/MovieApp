@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
-import TrendingCard from "./TrendingCard";
-import { search, getMoviesGenre } from "../../API/DataSource";
+import { search, getMoviesGenre } from "../../api/dataSource";
+import SearchCard from "./SearchCard";
+import SearchPagination from "./SearchPagination";
 
 const Search = () => {
   const { searchText } = useParams();
@@ -16,11 +17,13 @@ const Search = () => {
   const [isFilter, setIsFilter] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState();
   const resultsToDisplay = isFilter ? filterResult : searchResult;
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalNumOfPages] = useState(0);
 
   useEffect(() => {
     loadMoviesGenre();
     handleSearch();
-  }, [searchQ]);
+  }, [searchQ, page]);
 
   async function loadMoviesGenre() {
     setGenres(await getMoviesGenre());
@@ -28,7 +31,7 @@ const Search = () => {
 
   async function handleSearch() {
     if (!searchQueryStatus) {
-      setSearchResult(await search(searchQ));
+      await search(searchQ, page, setSearchResult, setTotalNumOfPages);
     }
   }
 
@@ -98,14 +101,20 @@ const Search = () => {
           ) : (
             resultsToDisplay.map((movie) => {
               return (
-                <TrendingCard
+                <SearchCard
                   key={movie.id}
-                  className="movie-card"
+                  className="search-card"
                   movie={movie}
                 />
               );
             })
           )}
+          <SearchPagination
+            // handleNextPage={handleNextPage}
+            page={page}
+            setPage={setPage}
+            totalPages={totalPages}
+          />
         </div>
       </div>
     </div>

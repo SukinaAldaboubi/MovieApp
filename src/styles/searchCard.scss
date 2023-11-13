@@ -1,0 +1,54 @@
+.cardLink {
+    text-decoration: none;
+    color: black;
+}
+
+#search-main-card {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 90%;
+    height: 9rem;
+    
+    margin: 16px;
+    border: 1px solid rgb(219, 214, 214);
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px 0 rgba(118, 116, 116, 0.2);
+    overflow: hidden;
+    
+
+    img {
+        width: 90px;
+        height: 100%;
+    }
+
+    .card-desc{
+        display: flex;
+        flex-direction: column;
+        margin-top: 8px;
+        padding: 16px;
+
+
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            padding-bottom: 4px;
+        }
+
+        .card-date{
+            font-size: 14px;
+            color: rgb(98, 89, 89);
+            padding-bottom: 16px;
+        }
+
+        .movie-desc{
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+        }
+        
+        
+    }
+}

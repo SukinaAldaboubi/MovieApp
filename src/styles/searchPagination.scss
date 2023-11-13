@@ -1,0 +1,56 @@
+#pages-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 32px;
+
+    .num-container {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+        justify-content: center;
+
+        li {
+            align-items: center;
+
+            button {
+                text-align: center;
+                color: black;
+                background-color: white;
+                width: 24px;
+                height: 24px;
+                border: 1px solid black;
+                font-weight: bold;
+            }
+
+            button:hover {
+                cursor: pointer;
+            }
+
+            .notSelected {
+                border: 0;
+                font-weight: bold;
+            }
+
+            .selected {
+                border: 1px solid black;
+                font-weight: normal;
+            }
+        }
+    }
+
+    .previous {
+        font-weight: bold;
+        background-color: transparent;
+        border: 0;
+        padding-right: 8px;
+        cursor: pointer;
+    }
+
+    .next {
+        font-weight: bold;
+        background-color: transparent;
+        border: 0;padding-left: 8px;
+        cursor: pointer;
+    }
+}

@@ -46,7 +46,7 @@
                 height: 100%;
                 width: 8rem;
                 right: 0px;
-                background-color: lighten($color: $themeColor, $amount: 5%);
+                background-image: linear-gradient(to right, rgb(118, 224, 194), rgb(81, 150, 189));
                 border-radius: 25px;
                 color: white;  
             }

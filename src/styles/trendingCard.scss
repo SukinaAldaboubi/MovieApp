@@ -12,6 +12,7 @@
     height: 24rem;
     padding: 16px;
     margin-top: 16px;
+    
 
     img {
         width: 10rem;
@@ -30,20 +31,37 @@
 
         
         .rate-view {
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background-color: $themeColor;
             margin-bottom: 8px;
             
 
             .rate-value {
-                font-size: 12px;
+                font-size: 10px;
                 font-weight: bold;
                 color: white;
+            }
+
+            .rate-progress {
+                position: absolute;
+                width:32px;
+                height:32px;
+                overflow: visible;
+
+                .background-circle{
+                    fill: none;
+                }
+
+                .progress-circle{
+                    fill: none;
+                    stroke-linecap: round;
+                }
             }
         }
 

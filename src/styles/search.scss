@@ -81,13 +81,14 @@
 
         .result-section {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             margin: 16px;
             flex-wrap: wrap;
 
-            .movie-card {
+            .search-card {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
+                width: 100%;
             }
         }
     }
