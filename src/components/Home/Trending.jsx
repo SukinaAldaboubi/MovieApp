@@ -35,6 +35,7 @@ const Trending = ({
               />
             );
           })}
+          <div className="fadeOutDiv" />
         </div>
       )}
     </main>

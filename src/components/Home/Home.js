@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Header from "./HomeHeader";
-import Trending from "./Trending";
+import { HomeHeader } from "../Home";
+import { Trending } from "../Home";
 import { getTrendingMovies } from "../../api/dataSource";
 
 const Home = () => {
@@ -34,7 +34,7 @@ const Home = () => {
 
   return (
     <section id="home">
-      <Header handleSearch={search} />
+      <HomeHeader handleSearch={search} />
 
       <Trending
         movies={trendingMovies}

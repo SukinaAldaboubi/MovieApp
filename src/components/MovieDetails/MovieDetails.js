@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import {
@@ -7,11 +7,10 @@ import {
   getExternalIds,
 } from "../../api/dataSource";
 import imgUrl from "../../api/dataSource";
-import CastCard from "./CastCard";
 import { facebookUrl, instagramUrl, twitterUrl } from "../../api/global";
-import ImageLink from "../helpers/ImageLink";
-import TitleValueCard from "../helpers/TitleValueCard";
 import CircleProgress from "../helpers/CircleProgress";
+import { Casts } from "../MovieDetails";
+import { SideInfo } from "../MovieDetails";
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -25,15 +24,18 @@ const MovieDetails = () => {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const loadMovieDetails = useMemo(
+    () => async () => {
+      await getMovieDetails(movieId, setMovieDetails, setError, setLoading);
+      await getMovieCredits(movieId, setMovieCredits);
+      await getExternalIds(movieId, setExternalIds);
+    },
+    [movieId]
+  );
+
   useEffect(() => {
     loadMovieDetails();
-  }, []);
-
-  async function loadMovieDetails() {
-    await getMovieDetails(movieId, setMovieDetails, setError, setLoading);
-    await getMovieCredits(movieId, setMovieCredits);
-    await getExternalIds(movieId, setExternalIds);
-  }
+  }, [loadMovieDetails]);
 
   const handleFav = () => {
     let newStorageItem = [];
@@ -163,6 +165,12 @@ const MovieDetails = () => {
     return socialLinks;
   };
 
+  const details = useMemo(() => getDetails(), [movieDetails]);
+  const crews = useMemo(() => getCrew(), [movieCredits]);
+  const casts = useMemo(() => getCast(), [movieCredits]);
+  const sideInfos = useMemo(() => getSideInfo(), [movieDetails]);
+  const socialMedias = useMemo(() => getSocialLinks(), [externalIds]);
+
   if (error) {
     return <p className="errorLbl">{error}</p>;
   }
@@ -187,26 +195,26 @@ const MovieDetails = () => {
             <div className="movie-details">
               <div className="title-section">
                 <h1 className="title">
-                  {movieDetails.title}{" "}
-                  <label className="year">({getDetails().year})</label>{" "}
+                  {movieDetails.title}
+                  <label className="year">({details.year})</label>
                 </h1>
               </div>
               <div className="details">
                 <label className="date">{movieDetails.release_date}</label>
                 <div className="circle-sep" />
-                <label className="movie-type">{getDetails().genres}</label>
+                <label className="movie-type">{details.genres}</label>
                 <div className="circle-sep" />
                 <label className="time">
-                  {getDetails().hours}h {getDetails().minutes}m
+                  {details.hours}h {details.minutes}m
                 </label>
               </div>
               <div className="actions">
                 <div className="rate-section">
                   <div className="rate">
-                    <label className="rate-value">{getDetails().rate}%</label>
+                    <label className="rate-value">{details.rate}%</label>
 
                     <CircleProgress
-                      percentage={getDetails().rate}
+                      percentage={details.rate}
                       cx="24px"
                       cy="24px"
                       r="24px"
@@ -231,8 +239,8 @@ const MovieDetails = () => {
                 <p className="overview">{movieDetails.overview}</p>
               </div>
               <div className="crew-section">
-                {getCrew().map((crew) => (
-                  <div className="crew-info">
+                {crews.map((crew, index) => (
+                  <div key={index} className="crew-info">
                     <h5 className="crew-name">{crew.name}</h5>
                     <label className="crew-job">{crew.job}</label>
                   </div>
@@ -243,31 +251,8 @@ const MovieDetails = () => {
         </div>
       </div>
       <div className="cast-side-info">
-        <div className="cast-section">
-          <h3>Top Billed Cast</h3>
-          <div className="cast-data">
-            {getCast().map((cast) => {
-              return <CastCard cast={cast} />;
-            })}
-          </div>
-        </div>
-
-        <div className="sideInfo-section">
-          <div className="socail-media">
-            {getSocialLinks().map((socialLink) => {
-              return (
-                <ImageLink type={socialLink.type} link={socialLink.link} />
-              );
-            })}
-          </div>
-          <div className="info-section">
-            {getSideInfo().map((sideInfo) => {
-              return (
-                <TitleValueCard title={sideInfo.title} value={sideInfo.value} />
-              );
-            })}
-          </div>
-        </div>
+        <Casts casts={casts} />
+        <SideInfo socialMedias={socialMedias} sideInfos={sideInfos} />
       </div>
     </div>
   );

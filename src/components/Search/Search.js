@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BsSearch } from "react-icons/bs";
 import { search, getMoviesGenre } from "../../api/dataSource";
-import SearchCard from "./SearchCard";
-import SearchPagination from "./SearchPagination";
+import { SearchCard } from "../Search";
+import { SearchPagination } from "../Search";
 
 const Search = () => {
   const { searchText } = useParams();
@@ -34,6 +34,20 @@ const Search = () => {
       await search(searchQ, page, setSearchResult, setTotalNumOfPages);
     }
   }
+
+  const getGeners = () => {
+    let generItems = [];
+    genres.forEach((gener) => {
+      let count = 0;
+      searchResult.forEach((result) => {
+        if (result.genre_ids.includes(gener.id)) {
+          count += 1;
+        }
+      });
+      generItems.push({ generName: gener.name, count: count, id: gener.id });
+    });
+    return generItems;
+  };
 
   const searchDidChange = (e) => {
     setSelectedFilter(null);
@@ -75,19 +89,23 @@ const Search = () => {
           <div className="filter-content">
             <h3 className="filter-title">Filter by:</h3>
             <ul className="filter-list">
-              {genres.map((genre) => {
+              {getGeners().map((genre) => {
                 return (
                   <li
                     key={genre.id}
                     id="gener-item"
                     className={
-                      selectedFilter == genre.id
+                      selectedFilter === genre.id
                         ? "selectedItem"
                         : "notSelectedItem"
                     }
                     onClick={() => handleFilter(genre.id)}
                   >
-                    {genre.name}
+                    <div className="gener-info">
+                      <label className="generName">{genre.generName}</label>
+
+                      <label className="generCount">{genre.count}</label>
+                    </div>
                   </li>
                 );
               })}
@@ -109,8 +127,8 @@ const Search = () => {
               );
             })
           )}
+
           <SearchPagination
-            // handleNextPage={handleNextPage}
             page={page}
             setPage={setPage}
             totalPages={totalPages}

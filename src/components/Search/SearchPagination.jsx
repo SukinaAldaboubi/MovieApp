@@ -2,22 +2,17 @@ import React, { useEffect, useState } from "react";
 
 const SearchPagination = ({ page, setPage, totalPages }) => {
   const [pageNum, setpageNum] = useState([]);
+    
+  const pages = pageNum.reduce((acc, num) => {
+      acc.push(num);
+      return acc;
+  }, pageNum);
+  
 
   useEffect(() => {
-    setUpPages();
-  }, []);
-
-  const setUpPages = () => {
-    let pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(i);
-    }
     setpageNum(pages);
-  };
-
-  const previous = () => {};
-
-  const next = () => {};
+  }, []);
+  
 
   return (
     <div id="pages-container">
@@ -30,33 +25,33 @@ const SearchPagination = ({ page, setPage, totalPages }) => {
       )}
 
       <ul className="num-container">
-        {pageNum.map((num) => (
-          <li key={num}>
-            {num === 8 ? (
-              "..."
-            ) : num < 8 ? (
-              ""
+        {pageNum.map((num) =>
+          num === 8 ? (
+            <p>...</p>
+          ) : num > 7 ? (
+            num === totalPages || totalPages - 1 === num ? (
+              <li key={num}>
+                <button
+                  className={page === num ? "selected" : "notSelected"}
+                  onClick={() => setPage(num)}
+                >
+                  {num}
+                </button>
+              </li>
             ) : (
+              ""
+            )
+          ) : (
+            <li key={num}>
               <button
                 className={page === num ? "selected" : "notSelected"}
                 onClick={() => setPage(num)}
               >
                 {num}
               </button>
-            )}
-
-            {num === totalPages || num === totalPages - 1 ? (
-              <button
-                className={page === num ? "selected" : "notSelected"}
-                onClick={() => setPage(num)}
-              >
-                {num}
-              </button>
-            ) : (
-              ""
-            )}
-          </li>
-        ))}
+            </li>
+          )
+        )}
       </ul>
 
       {page != totalPages ? (

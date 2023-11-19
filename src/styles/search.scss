@@ -29,7 +29,7 @@
     }
 
     .content-section {
-        margin: 32px 0 32px 164px;
+        margin: 32px 0 32px 104px;
         display: flex;
         flex-direction: row;
 
@@ -44,7 +44,7 @@
                 flex-direction: column;
                 align-items: left;
                 border: 1px solid rgb(219, 214, 214);
-                border-radius: 16px;
+                border-radius: 8px;
                 width: 18rem;
                 overflow: hidden;
 
@@ -53,6 +53,7 @@
                     background-color: $themeColor;
                     padding: 24px 0 12px 24px;
                     height: 32px;
+                    margin-bottom: 12px;
                 }
 
                 .filter-list {
@@ -61,6 +62,25 @@
 
                     #gener-item {
                         padding: 12px;
+
+                        .gener-info{
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                            height: 24px;
+
+                            .generCount {
+                                background-color: rgb(235, 231, 231);
+                                border-radius: 8px;
+                                padding: 8px;
+                                margin: 6px;
+                                width: 28px;
+                                height: 16px;
+                                text-align: center;
+                                font-weight: lighter;
+                            }
+                        }
                     }
 
                     #gener-item:hover {
@@ -68,10 +88,12 @@
                     }
 
                     .selectedItem {
+                        font-weight: bold;
                         background-color: lighten($color: $themeColor, $amount: 80%); 
                     }
 
                     .notSelectedItem {
+                        font-weight: normal;
                         background-color: white; 
                     }
                     

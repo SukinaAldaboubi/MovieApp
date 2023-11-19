@@ -20,10 +20,10 @@ const TrendingCard = ({ movie }) => {
             <label className="rate-value">{percentage}%</label>
             <CircleProgress
               percentage={percentage}
-              cx="16px"
-              cy="16px"
-              r="16px"
-              strokeWidth="2px"
+              cx="24px"
+              cy="24px"
+              r="24px"
+              strokeWidth="3px"
             />
           </div>
           <label className="card-title">
